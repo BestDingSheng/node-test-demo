@@ -1,0 +1,59 @@
+<%- include header%>
+
+  <div class="row" id=‘login’ style="margin-top:200px;">
+    <div class="col-md-3"></div>
+    <div class="col-md-6">
+
+      <div class="panel panel-success">
+        <div class="panel-heading">用户注册</div>
+        <div class="panel-body">
+          <form class="form-horizontal" action="http://localhost:3000/actReg" method="get">
+            <div class="form-group">
+              <label for="inputEmail3" class="col-sm-2 control-label">用户名</label>
+              <div class="col-sm-10">
+                <input type="text" name='username' class="form-control" id="username" placeholder="请输入用户名">
+              </div>
+            </div>
+            <div class="form-group">
+              <label for="inputPassword3" class="col-sm-2 control-label">密码</label>
+              <div class="col-sm-10">
+                <input type="password" name='password' class="form-control" id="password" placeholder="Password">
+              </div>
+            </div>
+            <div class="form-group">
+              <div class="col-sm-offset-2 col-sm-10">
+                <button type="button" class="btn btn-info" id="regBtn">注册</button>
+              </div>
+            </div>
+          </form>
+        </div>
+        <div class="panel-footer">此版权归丁盛所有</div>
+      </div>
+
+    </div>
+
+  </div>
+
+
+
+  <%- include footer%>
+
+
+  <script type="text/javascript">
+    $('#regBtn').on('click',function(){
+      let username = $('#username').val();
+      let password = $('#password').val();
+      $.ajax({
+        type: "post",
+        url: "/api/reg",
+        data: {
+          username:username,
+          password:password
+        },
+        dataType: "json",
+        success: function(data) {
+          location.href = '/login';
+        }
+      });
+    })
+  </script>
