@@ -1,0 +1,41 @@
+<%- include header%>
+
+  <div class="row">
+    <div class="col-md-6 col-md-offset-3">
+
+      <h3>
+        我是留言板
+        <a href="/board" class="btn-sm btn-info pull-right">去留言</a>
+      </h3>
+
+
+        <% if(data.length>0){ %>
+          <% for(let i =0 ; i<data.length;i++){ %>
+            <div class="panel panel-info">
+              <!-- Default panel contents -->
+              <div class="panel-heading">
+                小小留言板
+              </div>
+              <div class="panel-body">
+                <p>
+                  <%=data[i].content%>
+                </p>
+              </div>
+                <div class="panel-footer">
+                  <span>留言人<%=data[i].username%></span>
+                  <span class="pull-right">留言时间<%=data[i].date%></span>
+                </div>
+            </div>
+            <%}%>
+
+          <%}else{%>
+              <p style="margin-top:100px;">暂无留言,快去留言吧</p>
+            <%}%>
+
+
+
+
+    </div>
+  </div>
+
+  <%- include footer%>
