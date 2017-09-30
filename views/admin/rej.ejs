@@ -11,13 +11,13 @@
             <div class="form-group">
               <label for="inputEmail3" class="col-sm-2 control-label">用户名</label>
               <div class="col-sm-10">
-                <input type="text" name='username' class="form-control" id="username" placeholder="请输入用户名">
+                <input type="text" name='username' autocomplete='off' class="form-control" id="username" placeholder="请输入用户名">
               </div>
             </div>
             <div class="form-group">
               <label for="inputPassword3" class="col-sm-2 control-label">密码</label>
               <div class="col-sm-10">
-                <input type="password" name='password' class="form-control" id="password" placeholder="Password">
+                <input type="password" autocomplete='off' name='password' class="form-control" id="password" placeholder="Password">
               </div>
             </div>
             <div class="form-group">
@@ -45,14 +45,22 @@
       let password = $('#password').val();
       $.ajax({
         type: "post",
-        url: "/api/reg",
+        url: "/api/adduser",
         data: {
           username:username,
           password:password
         },
         dataType: "json",
         success: function(data) {
-          location.href = '/login';
+          let code = data.code;
+          let msg = data.msg;
+          if(code==200 || code == 100){
+            alert(msg);
+            location.href='/login';
+          }else{
+            alert(msg);
+          }
+
         }
       });
     })

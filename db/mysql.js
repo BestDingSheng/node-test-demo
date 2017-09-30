@@ -1,8 +1,8 @@
 var mysql = require('mysql');
 var pool  = mysql.createPool({
-  host: '127.0.0.1',
+  host: '47.95.235.183',
   user: 'root',
-  password: 'ding156561',
+  password: '',
   database:'blog', // 前面建的user表位于这个数据库中
   port: 3306
 });

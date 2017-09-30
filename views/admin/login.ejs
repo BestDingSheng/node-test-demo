@@ -11,18 +11,18 @@
             <div class="form-group">
               <label for="inputEmail3" class="col-sm-2 control-label">用户名</label>
               <div class="col-sm-10">
-                <input type="text" name='username' class="form-control" id="inputEmail3" placeholder="请输入用户名">
+                <input type="text" name='username' class="form-control" id="username" placeholder="请输入用户名">
               </div>
             </div>
             <div class="form-group">
               <label for="inputPassword3" class="col-sm-2 control-label">密码</label>
               <div class="col-sm-10">
-                <input type="password" name='password' class="form-control" id="inputPassword3" placeholder="Password">
+                <input type="password" name='password' class="form-control" id="password" placeholder="Password">
               </div>
             </div>
             <div class="form-group">
               <div class="center-block">
-                <button type="button" class="btn btn-success">登陆</button>
+                <button type="button" class="btn btn-success" id="loginBtn">登陆</button>
                 <a  href="/reg" style="margin-left:20px;" class="btn btn-success pull-right">注册</a>
               </div>
             </div>
@@ -36,3 +36,29 @@
   </div>
 
   <%- include footer%>
+
+  <script type="text/javascript">
+    $('#loginBtn').on('click',function(){
+      let username = $('#username').val();
+      let password = $('#password').val();
+      $.ajax({
+        type: "post",
+        url: "/api/login",
+        data: {
+          username:username,
+          password:password
+        },
+        dataType: "json",
+        success: function(data) {
+          let code = data.code;
+          let msg = data.msg;
+          if(code==200){
+            location.href='/'
+          }else{
+            alert(msg);
+          }
+
+        }
+      });
+    })
+  </script>

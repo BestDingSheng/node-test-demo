@@ -1,5 +1,6 @@
 var express = require('express');
 var router = express.Router();
+var moment = require('moment');
 var dbModel = require('../db/mysql');
 
 /* GET users listing. */
@@ -83,8 +84,8 @@ router.get('/exit', function(req, res) {
 
 router.post('/post',function(req,res){
   let username = req.body.username;
-  let content  = req.body.username;
-  let date = new Date().getTime()/1000;
+  let content  = req.body.content;
+  let date = moment().format('YYYY-MM-DD HH:mm:ss');
 
 
 // return;

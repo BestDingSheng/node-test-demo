@@ -4,7 +4,7 @@
   "private": true,
   "scripts": {
     "start": "pm2 start --watch -i max ./bin/www",
-    "stop":"pm2 stop all"
+    "stop": "pm2 stop all"
   },
   "dependencies": {
     "body-parser": "~1.17.1",
@@ -13,6 +13,7 @@
     "ejs": "^2.5.7",
     "express": "~4.15.2",
     "jade": "~1.11.0",
+    "moment": "^2.18.1",
     "morgan": "~1.8.1",
     "mysql": "latest",
     "serve-favicon": "~2.4.2"
