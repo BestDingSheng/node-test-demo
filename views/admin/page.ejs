@@ -1,0 +1,54 @@
+<%if(title=='首页'){%>
+
+    <nav aria-label="Page navigation">
+    <ul class="pagination">
+      <li>
+        <a href="/?page=<%=1%>" aria-label="Previous">
+          <span aria-hidden="true">&laquo;</span>
+        </a>
+      </li>
+      <%for(let i =1; i<=totalPage;i++){%>
+        <%if(curPage+1==i){%>
+            <li class="active"><a href="/?page=<%=i%>"><%= i %></a></li>
+        <%}else{%>
+            <li><a href="/?page=<%=i%>"><%= i %></a></li>
+        <%}%>
+
+      <%}%>
+      <li>
+        <a href="/?page=<%=totalPage%>" aria-label="Next">
+          <span aria-hidden="true">&raquo;</span>
+        </a>
+      </li>
+    </ul>
+  </nav>
+
+
+
+<%}else{%>
+
+    <nav aria-label="Page navigation">
+    <ul class="pagination">
+      <li>
+        <a href="/planList?page=<%=1%>" aria-label="Previous">
+          <span aria-hidden="true">&laquo;</span>
+        </a>
+      </li>
+      <%for(let i =1; i<=totalPage;i++){%>
+        <%if(curPage+1==i){%>
+            <li class="active"><a href="/?page=<%=i%>"><%= i %></a></li>
+        <%}else{%>
+            <li><a href="/planList?page=<%=i%>"><%= i %></a></li>
+        <%}%>
+
+      <%}%>
+      <li>
+        <a href="/planList?page=<%=totalPage%>" aria-label="Next">
+          <span aria-hidden="true">&raquo;</span>
+        </a>
+      </li>
+    </ul>
+  </nav>
+
+
+<%}%>

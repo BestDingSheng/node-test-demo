@@ -26,16 +26,20 @@
             <%=data[i].username %>
           </td>
           <td class="password">
-            <%=data[i].password %>
+            <%=data[i].password -%>
           </td>
           <td >
-            <button type="button" class="btn btn-info submit" data="<%=i+1%>" name="button">编辑</button>
-            <button type="button" class="btn btn-info" name="button">删除</button>
+
+           <button type="button" class="btn btn-info submit btn-sm" data="<%=i+1%>" name="button">编辑</button>
+
+            <button type="button" class="btn btn-info btn-sm" name="button">删除</button>
           </td>
         </tr>
         <%}%>
     </tbody>
   </table>
+
+<%- include page%>
 
 
   <!-- Modal -->

@@ -53,25 +53,40 @@ let login = function( value ) {
 
 // 查找所有用户
 
-let getAlluser = function(){
-  let _sql = "SELECT * FROM user_table";
+let getAlluser = function(value){
+  let starCount= value*10;
+  let endCount = 10;
+  let _sql = `SELECT * FROM user_table order by id desc limit ${starCount},${endCount}`;
+  return query( _sql )
+}
+//  用户总数
+let getAlluserCount = function(){
+  let _sql = 'SELECT COUNT(1) FROM user_table';
   return query( _sql )
 }
 
 
-// 发表文章
+// 添加留言
 let insertPost = function( value ) {
   let _sql = "insert into post (username,content,date) values(?,?,?)";
   return query( _sql, value )
 }
 
-// 查找所有文章
+// 查找所有留言
 
 let getAllPost =  function(value){
-  let _sql = "SELECT * FROM post order by uid desc limit 0,10";
+  let starCount= value*10;
+  let endCount = 10;
+  let _sql = `SELECT * FROM post order by uid desc limit ${starCount},${endCount}`;
   return query( _sql )
 }
 
+
+//  留言总数
+let getAllPostCount = function(){
+  let _sql = 'SELECT COUNT(1) FROM post';
+  return query( _sql )
+}
 
 
 module.exports={
@@ -81,6 +96,8 @@ module.exports={
   login,
   getAlluser,
   insertPost,
-  getAllPost
+  getAllPost,
+  getAlluserCount,
+  getAllPostCount
 
 }

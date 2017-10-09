@@ -35,15 +35,20 @@ router.get('*', function(req, res, next) {
 // 首页
 router.get('/', function(req, res, next) {
   if (req.cookies.name) {
-    dbModel.getAlluser().then(results => {
-      console.log(results);
-      res.render('admin/index', {
-        name: req.cookies.name,
-        data: results,
-        title: '首页'
-      });
+    let curPage = req.query.page-1 || 0;
+    dbModel.getAlluser([curPage]).then(results => {
+      dbModel.getAlluserCount().then(count=>{
+        let totalCount = count[0]['COUNT(1)'];
+        let totalPage =  Math.ceil(totalCount/10);
+        res.render('admin/index', {
+          name: req.cookies.name,
+          data: results,
+          totalPage:totalPage,
+          curPage:curPage,
+          title: '首页'
+        });
+      })
     })
-
   } else {
     res.redirect('/login');
   }
@@ -78,24 +83,31 @@ router.get('/reg', function(req, res, next) {
 // 查看留言板
 
 router.get('/planList', function(req, res) {
+  let curPage = req.query.page-1 || 0;
 
-  dbModel.getAllPost().then(results => {
+  console.log(curPage);
+  dbModel.getAllPost([curPage]).then(results => {
+    dbModel.getAllPostCount().then(count=>{
+      for(let i=0;i<results.length;i++){
+        results[i].date=moment(results[i].date).format('YYYY-MM-DD HH:mm:ss');
+      }
+      let totalCount = count[0]['COUNT(1)'];
+      let totalPage =  Math.ceil(totalCount/10);
+      res.render('admin/planList', {
+        title: '查看留言板',
+        data: results,
+        name: req.cookies.name,
+        totalPage:totalPage,
+        curPage:curPage
+      });
+
+    })
 
 
-    for(let i=0;i<results.length;i++){
-      // console.log(results[i].date);
-      console.log(moment(results[i].date).format('YYYY-MM-DD HH:mm:ss'));
-      results[i].date=moment(results[i].date).format('YYYY-MM-DD HH:mm:ss');
-
-    }
 
 
 
-    res.render('admin/planList', {
-      title: '查看留言板',
-      data: results,
-      name: req.cookies.name,
-    });
+
   })
 
 })
